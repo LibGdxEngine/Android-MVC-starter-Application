@@ -11,7 +11,6 @@ import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import com.example.starterapp.R
 import com.example.starterapp.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,10 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarHome.toolbar)
 
-        binding.appBarHome.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
+
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(this, R.id.nav_host_fragment_content_home)
@@ -39,6 +35,11 @@ class MainActivity : AppCompatActivity() {
 //                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow), drawerLayout)
         setupActionBarWithNavController(this, navController)
 //        navView.setupWithNavController(navController)
+        binding.appBarHome.fab.setOnClickListener { view ->
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show()
+            navController.navigate(R.id.action_nav_home_to_capture_video_graph)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -194,11 +194,11 @@ class CaptureFragment : Fragment() {
         if (event is VideoRecordEvent.Finalize) {
              // display the captured video
             lifecycleScope.launch {
-//                navController.navigate(
-//                    CaptureFragmentDirections.actionCaptureToVideoViewer(
-//                        event.outputResults.outputUri
-//                    )
-//                )
+                navController.navigate(
+                    CaptureFragmentDirections.actionCaptureFragmentToVideoViewerFragment(
+                        event.outputResults.outputUri
+                    )
+                )
             }
         }
     }

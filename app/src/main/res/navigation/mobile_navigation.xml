@@ -3,13 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/captureFragment">
+    app:startDestination="@id/nav_home">
 
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.starterapp.screens.Main.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_capture_video_graph"
+            app:destination="@id/capture_video_graph" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_gallery"
@@ -22,8 +26,37 @@
         android:name="com.example.starterapp.screens.Main.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
-    <fragment
-        android:id="@+id/captureFragment"
-        android:name="com.example.starterapp.screens.CaptureFragment.CaptureFragment"
-        android:label="CaptureFragment" />
+    <navigation android:id="@+id/capture_video_graph"
+        app:startDestination="@id/permissionsFragment">
+        <fragment
+            android:id="@+id/permissionsFragment"
+            android:name="com.example.starterapp.screens.CaptureFragment.PermissionsFragment"
+            android:label="Permissions">
+            <action
+                android:id="@+id/action_permissionsFragment_to_captureFragment"
+                app:destination="@id/captureFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/captureFragment"
+            android:name="com.example.starterapp.screens.CaptureFragment.CaptureFragment"
+            android:label="Capture">
+            <action
+                android:id="@+id/action_captureFragment_to_videoViewerFragment"
+                app:destination="@id/videoViewerFragment" />
+            <action
+                android:id="@+id/action_captureFragment_to_permissionsFragment"
+                app:destination="@id/permissionsFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/videoViewerFragment"
+            android:name="com.example.starterapp.screens.CaptureFragment.VideoViewerFragment"
+            android:label="VideoViewerFragment">
+            <action
+                android:id="@+id/action_videoViewerFragment_to_captureFragment"
+                app:destination="@id/captureFragment" />
+            <argument
+                android:name="uri"
+                app:argType="android.net.Uri" />
+        </fragment>
+    </navigation>
 </navigation>
